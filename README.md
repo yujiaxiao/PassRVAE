@@ -77,3 +77,8 @@ Model saved at ./bin/2023-Oct-02-12:56:35/E10.pytorch\
 VALID Epoch 10/20, Mean ELBO   32.0790\
 Early stopping
 ## Generate
+Now you can use your trained model in the previous step to generate passwords. Or you can directly use our pretrained model to generate passwords.
+```
+python3 generate.py
+```
+Model loaded from ./pretrained/PassRVAE_4class8_20%.pytorch
