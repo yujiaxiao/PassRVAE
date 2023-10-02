@@ -14,7 +14,7 @@ from utils import to_var, idx2char, experiment_name
 from model import PassRVAE
 import torch
 
-from torchtext.data.utils import get_tokenizer
+#from torchtext.data.utils import get_tokenizer
 import time
 from pytorchtools import EarlyStopping
 
