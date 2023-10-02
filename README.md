@@ -81,4 +81,5 @@ Now you can use your trained model in the previous step to generate passwords. O
 ```
 python3 generate.py
 ```
+Output:\
 Model loaded from ./pretrained/PassRVAE_4class8_20%.pytorch
