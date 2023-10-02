@@ -20,7 +20,7 @@ def main(args):
                 char_str+= i2w[str(char_id)]
         return char_str
         
-    with open(args.data_dir+'/4iq-4class8-20%-vocab.json', 'r') as file:
+    with open('./pretrained'+'/4iq-4class8-20%-vocab.json', 'r') as file:
         vocab = json.load(file)
     w2i, i2w = vocab['w2i'], vocab['i2w']
 
