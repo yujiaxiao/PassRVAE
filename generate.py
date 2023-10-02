@@ -51,7 +51,7 @@ def main(args):
 
     model.eval()
 
-    with open('/dataset-hdd/PassRVAE/code/PassRVAE/data/PassRVAE_4class8-20%-generation_10_7.txt', 'w') as file1:
+    with open('./data/PassRVAE_4class8-20%-generation_10_7.txt', 'w') as file1:
         for _ in range(1000):
             samples, z = model.inference(n=args.num_samples)
             samples = samples.squeeze().tolist()
@@ -65,10 +65,10 @@ def main(args):
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
 
-    parser.add_argument('-c', '--load_checkpoint', type=str,default="/dataset-hdd/PassRVAE/model/PassRVAE_4class8_20:80.pytorch")
+    parser.add_argument('-c', '--load_checkpoint', type=str,default="./pretrained/PassRVAE_4class8_20:80.pytorch")
     parser.add_argument('-n', '--num_samples', type=int, default=10000)
 
-    parser.add_argument('-dd', '--data_dir', type=str, default='/dataset-hdd/PassRVAE/code/PassRVAE/data')
+    parser.add_argument('-dd', '--data_dir', type=str, default='./data')
     parser.add_argument('-ms', '--max_sequence_length', type=int, default=31)
     parser.add_argument('-eb', '--embedding_size', type=int, default=300)
     parser.add_argument('-rnn', '--rnn_type', type=str, default='gru')
