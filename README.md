@@ -17,6 +17,7 @@ grep -a -E '([[:upper:]].*[[:lower:]].*[[:digit:]])|([[:upper:]].*[[:lower:]].*[
 ### passwords with at least four category classes (uppercase letters, lowercase letters, symbols, digits)
 grep -a -E '[[:upper:]].*[[:lower:]].*[[:digit:]].*[[:punct:]]'
 
+In the following steps, we choose the 20:80 split of 4class8 of 4iQ as an example.
 ## Download code
 ```
 git clone https://github.com/yujiaxiao/PassRVAE PassRVAE
