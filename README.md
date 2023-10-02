@@ -26,7 +26,7 @@ cd PassRVAE
 ```
 python3 train.py
 ```
-Output:
+Output:\
 TRAIN preprocessed file not found at ./data/4iq-4class8-20%-train.json. Creating new.\
 Vocablurary of 114 keys created.\
 VALID preprocessed file not found at ./data/4iq-4class8-20%-valid.json. Creating new.\
@@ -74,5 +74,5 @@ VALID Epoch 09/20, Mean ELBO   32.0248\
 TRAIN Epoch 10/20, Mean ELBO   31.3976\
 Model saved at ./bin/2023-Oct-02-12:56:35/E10.pytorch\
 VALID Epoch 10/20, Mean ELBO   32.0790\
-Early stopping\
+Early stopping
 ## Generate
