@@ -65,7 +65,7 @@ def main(args):
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
 
-    parser.add_argument('-c', '--load_checkpoint', type=str,default="./pretrained/PassRVAE_4class8_20:80.pytorch")
+    parser.add_argument('-c', '--load_checkpoint', type=str,default="./pretrained/PassRVAE_4class8_20%.pytorch")
     parser.add_argument('-n', '--num_samples', type=int, default=10000)
 
     parser.add_argument('-dd', '--data_dir', type=str, default='./data')
