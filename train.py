@@ -174,7 +174,7 @@ if __name__ == '__main__':
 
     parser.add_argument('-c', '--load_checkpoint', type=str,default="/content/gdrive/MyDrive/PassRVAE/bin/2023-Jul-31-05:22:22/E4.pytorch")
     
-    parser.add_argument('--data_dir', type=str, default="/dataset-hdd/PassRVAE/code/PassRVAE/data")
+    parser.add_argument('--data_dir', type=str, default="./data")
     parser.add_argument('--vocab_file', type=str, default="4iq-4class8-20%-vocab.json")
     parser.add_argument('--create_data', action='store_true')
     parser.add_argument('--load_data', action='store_true')
@@ -202,8 +202,8 @@ if __name__ == '__main__':
 
     parser.add_argument('-v', '--print_every', type=int, default=50)
     parser.add_argument('-tb', '--tensorboard_logging', action='store_true')
-    parser.add_argument('-log', '--logdir', type=str, default='/dataset-hdd/PassRVAE/code/PassRVAE/logs')
-    parser.add_argument('-bin', '--save_model_path', type=str, default='/dataset-hdd/PassRVAE/code/PassRVAE/bin')
+    parser.add_argument('-log', '--logdir', type=str, default='./logs')
+    parser.add_argument('-bin', '--save_model_path', type=str, default='./bin')
     parser.add_argument('-patience','--patience',type=int,default=1)
 
     args = parser.parse_args()
