@@ -103,44 +103,43 @@ def main(args):
     early_stopping = EarlyStopping(args.patience, verbose=False)
 
     for epoch in range(args.epochs):
-        #mean_valid_loss=[]
-        for split in splits:
-            #valid_losses=[]
-            data_loader = datasets[split]._create_data()
-            #print("data_loader",data_loader)
-
-            tracker = defaultdict(tensor)
-
-            if split == 'train':
-                model.train()
-            else:
-                model.eval()
-
-            for iteration, batch in enumerate(data_loader):
-                #print("batch.items()",batch.items())
-                input_sequence=[item['input'] for item in batch.values()]
-                input_sequence=torch.tensor(input_sequence).cuda()
-                #print("input sequence",input_sequence)
-                target_sequence=[item['target'] for item in batch.values()]
-                target_sequence=torch.tensor(target_sequence).cuda()
-                #print("target sequence",input_sequence)
-                length=[item['length'] for item in batch.values()]
-                length=torch.tensor(length).cuda()
-                #print("length",length)
-
-                logp, mean, logv, z = model(input_sequence, length)
-                NLL_loss, KL_loss, KL_weight = loss_fn(logp, target_sequence,
-                                                       length, mean, logv,
-                                                       args.anneal_function, step, args.k, args.x0)
-
-                loss = (NLL_loss + KL_weight * KL_loss) /args.batch_size
-
-
+            for split in splits:
+                data_loader = DataLoader(
+                    dataset=datasets[split],
+                    batch_size=args.batch_size,
+                    shuffle=split == 'train',
+                    num_workers=cpu_count(),
+                    pin_memory=torch.cuda.is_available(),
+                    drop_last=True
+                )
+    
+                tracker = defaultdict(tensor)
+    
                 if split == 'train':
-                    optimizer.zero_grad()
-                    loss.backward()
-                    optimizer.step()
-                    step += 1
+                    model.train()
+                else:
+                    model.eval()
+    
+                for iteration, batch in enumerate(data_loader):
+                    batch_size = batch['input'].size(0)
+    
+                    for k, v in batch.items():
+                        if torch.is_tensor(v):
+                            batch[k] = to_var(v)
+    
+                    logp, mean, logv, z = model(batch['input'], batch['length'])
+    
+                    NLL_loss, KL_loss, KL_weight = loss_fn(logp, batch['target'],
+                                                           batch['length'], mean, logv,
+                                                           args.anneal_function, step, args.k, args.x0)
+    
+                    loss = (NLL_loss + KL_weight * KL_loss) / batch_size
+    
+                    if split == 'train':
+                        optimizer.zero_grad()
+                        loss.backward()
+                        optimizer.step()
+                        step += 1
 
                 tracker['ELBO'] = torch.cat((tracker['ELBO'], loss.data.view(1, -1)), dim=0)
 
